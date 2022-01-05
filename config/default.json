@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://CloneWar:ClonesRule@cluster0.0ttru.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "SWCloneWars"
+}
