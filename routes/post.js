@@ -51,15 +51,6 @@ router.get('/editPost/:id', async (req, res) => {
     }
 });
 
-router.get('/photoGallery/:id', async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-        return res.send(post);
-    } catch (ex) { 
-        return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
-});
-
 router.post('/', async (req, res) => {
     try {
 
@@ -69,10 +60,6 @@ router.post('/', async (req, res) => {
 
         const post = new Post ({
             name: req.body.name,
-            lat: req.body.lat,
-            lng: req.body.lng,
-            huntType: req.body.huntType,
-            prisePic: req.body.prisePic,
             text: req.body.text
         });
 
@@ -92,8 +79,6 @@ router.put('/:id', async (req, res) => {
             req.params.id,
             {
                 text: req.body.text,
-                lat: req.body.lat,
-                lng: req.body.lng,
             }
         );
 
@@ -152,19 +137,19 @@ router.put('/dislikes/:id', async (req, res) => {
     }
 });
 
-router.put('/prisePic/:id', async (req, res) => {
-    try {
-    const post = await Post.findByIdAndUpdate(req.params.id);
-        if (!post)   
-        return res.status(400).send(`The post with id "${req.params.id}" does not exist.`);
+// router.put('/prisePic/:id', async (req, res) => {
+//     try {
+//     const post = await Post.findByIdAndUpdate(req.params.id);
+//         if (!post)   
+//         return res.status(400).send(`The post with id "${req.params.id}" does not exist.`);
         
-        post.prisePic.push(req.body.url)
+//         post.prisePic.push(req.body.url)
         
-        await post.save();
-        return res.send(post);
-    } catch (ex) {
-        return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
-});
+//         await post.save();
+//         return res.send(post);
+//     } catch (ex) {
+//         return res.status(500).send(`Internal Server Error: ${ex}`);
+//     }
+// });
 
 module.exports = router;
